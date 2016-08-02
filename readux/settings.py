@@ -141,12 +141,12 @@ AUTHENTICATION_BACKENDS = (
     # they will need keys in localsettings and possibly display names
     # added to the dict in readux/__init__.py
     # The app will use the following backends prioritized by list order.
-    'social.backends.facebook.FacebookOAuth2',
+    # 'social.backends.facebook.FacebookOAuth2',
     'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOAuth2',
     'social.backends.twitter.TwitterOAuth',
-    'social.backends.zotero.ZoteroOAuth',
-    'django_auth_ldap.backend.LDAPBackend',
+    # 'social.backends.zotero.ZoteroOAuth',
+    # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend',
 )
