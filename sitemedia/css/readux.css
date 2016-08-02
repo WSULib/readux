@@ -1130,7 +1130,7 @@ header#page-bg .collection-image-info.collasped .info{
 }
 
 .login-list .login-ldap a {
-    background-color: #002878;
+    background-color: #226359;
     color: white;
 }
 
@@ -1151,10 +1151,11 @@ header#page-bg .collection-image-info.collasped .info{
 
 .login-list .login-ldap .login-icon {
     /* re-use emory logo from eultheme in banner */
-    background-image: url('/static/eultheme/img/EmoryVt_hero.png');
-    background-size: 90% 90%;
+    background-image: url('/static/eultheme/img/wsulibrarylogo2white.png');
+    background-size: 90%;
     background-repeat: no-repeat;
     background-position: center;
+    background-color:#226359;
 }
 
 .carousel-inner{
