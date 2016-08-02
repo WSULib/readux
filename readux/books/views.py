@@ -887,7 +887,7 @@ class ProxyView(View):
 
         # include response headers, except for server-specific items
         for header, value in remote_response.headers.iteritems():
-            if header not in ['Connection', 'Server', 'Keep-Alive', 'Link']:
+            if header not in ['Connection', 'Server', 'Keep-Alive', 'Link', 'Transfer-Encoding']:
                              # 'Access-Control-Allow-Origin', 'Link']:
                 # FIXME: link header is valuable, but would
                 # need to be made relative to current url
