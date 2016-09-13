@@ -127,10 +127,23 @@
     <xsl:element name="zone">
       <xsl:copy-of select="@xml:id"/>
       <xsl:attribute name="type">string</xsl:attribute>
-      <xsl:attribute name="ulx"><xsl:value-of select="@HPOS"/></xsl:attribute>
-      <xsl:attribute name="uly"><xsl:value-of select="@VPOS"/></xsl:attribute>
-      <xsl:attribute name="lrx"><xsl:value-of select="@HPOS + @WIDTH"/></xsl:attribute>
-      <xsl:attribute name="lry"><xsl:value-of select="@VPOS + @HEIGHT"/></xsl:attribute>
+      <xsl:choose>
+        <!-- when coordinates available for strings, calc ulx, uly, lrx, lry -->
+        <xsl:when test="@HPOS and @VPOS and @WIDTH and @HEIGHT">
+          <xsl:attribute name="ulx"><xsl:value-of select="@HPOS"/></xsl:attribute>
+          <xsl:attribute name="uly"><xsl:value-of select="@VPOS"/></xsl:attribute>
+          <xsl:attribute name="lrx"><xsl:value-of select="@HPOS + @WIDTH"/></xsl:attribute>
+          <xsl:attribute name="lry"><xsl:value-of select="@VPOS + @HEIGHT"/></xsl:attribute>
+        </xsl:when>
+        <!-- else, default to 0 -->
+        <xsl:otherwise>
+          <xsl:attribute name="ulx">0</xsl:attribute>
+          <xsl:attribute name="uly">0</xsl:attribute>
+          <xsl:attribute name="lrx">0</xsl:attribute>
+          <xsl:attribute name="lry">0</xsl:attribute>
+        </xsl:otherwise>
+      </xsl:choose>
+      
       <xsl:element name="w">
         <xsl:value-of select="@CONTENT"/>
       </xsl:element>

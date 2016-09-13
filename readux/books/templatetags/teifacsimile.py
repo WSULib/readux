@@ -12,7 +12,10 @@ register = template.Library()
 def percent(a, b):
     # a as percentage of b
     # ensure both are cast to float, divide, then multiply by 100
-    return (float(a) / float(b)) * 100
+    try:
+        return (float(a) / float(b)) * 100
+    except ZeroDivisionError:
+        return 100
 
 @register.filter
 def zone_style(zone, scale):
