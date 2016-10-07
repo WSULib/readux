@@ -24,6 +24,12 @@
 
       <p>To export an annotated edition of this volume or any other,
       please log in.</p>
+
+    <!-- prevent export from restricted collections -->
+    {% elif restricted_collection %}
+    <div class="alert alert-warning">Export functionality is not available
+      for the collection, "{{restricted_collection}}".</div>
+
     {% else %}
     {% if warning %}
     <div class="alert alert-warning">

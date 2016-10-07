@@ -1,7 +1,5 @@
 {# menu to export annotated tei, generate website package #}
 {% url 'books:volume' vol.pid as volume_url %}
-{% if volume_url in annotated_volumes %}
-{# if volume has annotations, give user option to download annotated TEI #}
 <div class="dropdown pull-right text-align-right">
   <button class="btn btn-default dropdown-toggle" type="button" id="export-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
     Export <i class="fa fa-download"></i>
@@ -14,4 +12,3 @@
   </ul>
   <p id="export-generating" class="hidden text-info">Generating... <i class="fa fa-cog fa-lg fa-spin"></i></p>
 </div>
-{% endif %}

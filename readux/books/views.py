@@ -652,6 +652,14 @@ class AnnotatedVolumeExport(DetailView, FormMixin, ProcessFormView,
 
     def get_context_data(self, **kwargs):
         context_data = super(AnnotatedVolumeExport, self).get_context_data()
+
+        # check if book in restricted collections
+        vol = self.object = self.get_object()
+        if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+            # check that volume is not part of collection restricted from export
+            logger.debug('restricting volume export based on collection')
+            context_data['restricted_collection'] =  vol.book.collection.label
+
         if not self.request.user.is_anonymous():
             # check that user has a github account linked
             try:
@@ -666,11 +674,17 @@ class AnnotatedVolumeExport(DetailView, FormMixin, ProcessFormView,
 
     def render(self, request, **kwargs):
         context_data = self.get_context_data()
-        context_data.update(kwargs)
+        context_data.update(kwargs)        
         return render(request, self.template_name, context_data)
 
     def post(self, request, *args, **kwargs):
         vol = self.object = self.get_object()
+
+        # don't do anything if volume is part of restricted collection
+        if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+            response = render(request, self.template_name, self.get_context_data())
+            response.status_code = 400  # bad request
+            return response
 
         # don't do anything if user is not logged in
         if self.request.user.is_anonymous():

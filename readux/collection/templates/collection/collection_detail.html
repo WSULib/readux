@@ -58,7 +58,7 @@
   <div class="container">
       <h1 property="schema:name">{{ collection.short_label }}</h1>
       {% if collection.dc.content.description %}
-        <p property="schema:description">{{ collection.dc.content.description }}</p>
+        <p property="schema:description">{{ collection.dc.content.description|safe }}</p>
       {% endif %}
   </div>
 
