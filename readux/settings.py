@@ -54,7 +54,8 @@ MIDDLEWARE_CLASSES = (
     'eultheme.middleware.DownpageMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'readux.accounts.middleware.LocalSocialAuthExceptionMiddleware'
+    'readux.accounts.middleware.LocalSocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -148,7 +149,7 @@ AUTHENTICATION_BACKENDS = (
     # 'social.backends.zotero.ZoteroOAuth',
     # 'django_auth_ldap.backend.LDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
+    # 'guardian.backends.ObjectPermissionBackend',
 )
 
 LOGIN_REDIRECT_URL = '/'
@@ -174,8 +175,8 @@ FEINCMS_RICHTEXT_INIT_CONTEXT = {
     'TINYMCE_JS_URL': '//tinymce.cachefly.net/4.2/tinymce.min.js'
 }
 
-GIT_AUTHOR_EMAIL = 'readux.emory@gmail.com'
-GIT_AUTHOR_NAME = 'readux'
+GIT_AUTHOR_EMAIL = 'libwebmaster@wayne.edu'
+GIT_AUTHOR_NAME = 'libwebmaster'
 
 
 try:
