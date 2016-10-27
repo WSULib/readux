@@ -76,3 +76,4 @@ docs/_build/
 sitemedia/plugins/annotator/scss/.sass-cache
 sitemedia/plugins/annotator/scss/node_modules
 static/plugins/annotator/scss/node_modules
+static/*
