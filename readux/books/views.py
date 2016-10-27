@@ -681,10 +681,10 @@ class AnnotatedVolumeExport(DetailView, FormMixin, ProcessFormView,
         vol = self.object = self.get_object()
 
         # don't do anything if volume is part of restricted collection
-        if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
-            response = render(request, self.template_name, self.get_context_data())
-            response.status_code = 400  # bad request
-            return response
+        # if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+        #     response = render(request, self.template_name, self.get_context_data())
+        #     response.status_code = 400  # bad request
+        #     return response
 
         # don't do anything if user is not logged in
         if self.request.user.is_anonymous():
