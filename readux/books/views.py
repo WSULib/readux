@@ -655,10 +655,10 @@ class AnnotatedVolumeExport(DetailView, FormMixin, ProcessFormView,
 
         # check if book in restricted collections
         vol = self.object = self.get_object()
-        # if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
-        #     # check that volume is not part of collection restricted from export
-        #     logger.debug('restricting volume export based on collection')
-        #     context_data['restricted_collection'] =  vol.book.collection.label
+        if vol.book.collection and vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+        	# check that volume is not part of collection restricted from export
+        	logger.debug('restricting volume export based on collection')
+        	context_data['restricted_collection'] =  vol.book.collection.label
 
         if not self.request.user.is_anonymous():
             # check that user has a github account linked
