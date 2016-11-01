@@ -562,6 +562,16 @@ class VolumeText(VolumeOcr):
         if not obj.exists or not obj.has_requisite_content_models or not obj.fulltext_available:
             raise Http404
 
+        # prevent if restricted collection
+        vol = obj
+        if vol.book.collection and vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+            # check that volume is not part of collection restricted from export
+            logger.debug('restricting volume text datastream based on collection')
+            content = {'restricted collection for full-text export':vol.book.collection.pid}
+            response = JsonResponse(content)
+            response.status_code = 403
+            return response
+
         response = HttpResponse(obj.get_fulltext(), 'text/plain')
         # generate a default filename based on the object label
         response['Content-Disposition'] = 'filename="%s.txt"' % \
@@ -579,6 +589,15 @@ class VolumeTei(View):
         # if object doesn't exist, isn't a volume, or doesn't have tei text - 404
         if not vol.exists or not vol.has_requisite_content_models or not vol.has_tei:
             raise Http404
+
+        # prevent if restricted collection   
+        if vol.book.collection and vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
+            # check that volume is not part of collection restricted from export
+            logger.debug('restricting volume text datastream based on collection')
+            content = {'restricted collection for TEI export':vol.book.collection.pid}
+            response = JsonResponse(content)
+            response.status_code = 403
+            return response
 
         tei = vol.generate_volume_tei()
         base_filename = '%s-tei' % vol.noid
@@ -679,12 +698,6 @@ class AnnotatedVolumeExport(DetailView, FormMixin, ProcessFormView,
 
     def post(self, request, *args, **kwargs):
         vol = self.object = self.get_object()
-
-        # don't do anything if volume is part of restricted collection
-        # if vol.book.collection.pid in settings.RESTRICTED_EXPORT_COLLECTIONS:
-        #     response = render(request, self.template_name, self.get_context_data())
-        #     response.status_code = 400  # bad request
-        #     return response
 
         # don't do anything if user is not logged in
         if self.request.user.is_anonymous():
