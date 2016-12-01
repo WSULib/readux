@@ -54,7 +54,8 @@ MIDDLEWARE_CLASSES = (
     'eultheme.middleware.DownpageMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'readux.accounts.middleware.LocalSocialAuthExceptionMiddleware'
+    'readux.accounts.middleware.LocalSocialAuthExceptionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
