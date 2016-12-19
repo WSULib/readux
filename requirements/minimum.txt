@@ -40,3 +40,5 @@ pyyaml
 # jekyll theme for zipfile used in export functionality
 -e git+https://github.com/emory-libraries-ecds/digitaledition-jekylltheme.git@develop#egg=digitaledition-jekylltheme
 django-guardian
+# mptt needed as of 12/18/2016
+django-mptt
